@@ -1,39 +1,3 @@
-<<<<<<< HEAD
-const http = require('http');
-const fs = require('fs');
-const path = require('path');
-
-const server = http.createServer((req, res) => {
-    const routeMap = {
-        '/index': 'index.html',
-        '/about': 'about.html',
-        '/contact': 'contact.html'
-    };
-
-    const filePath = routeMap[req.url];
-
-    if (filePath) {
-        const fullPath = path.join(__dirname, filePath);
-        fs.readFile(fullPath, 'utf8', (err, data) => {
-            if (err) {
-                res.writeHead(500, { 'Content-Type': 'text/html' });
-                res.end('<h1>Error 500: Error interno del servidor</h1>');
-            } else {
-                res.writeHead(200, { 'Content-Type': 'text/html' });
-                res.end(data);
-            }
-        });
-    } else {
-        res.writeHead(404, { 'Content-Type': 'text/html' });
-        res.end('<h1>Error 404: Página no encontrada</h1>');
-    }
-});
-
-const PORT = 3000;
-server.listen(PORT, () => {
-    console.log(`Servidor web escuchando en el puerto ${PORT}`);
-});
-=======
 // const http = require("http");
 
 // // Creamos el servidor
@@ -73,16 +37,20 @@ function serveHTML(res, fileName) {
   });
 }
 
+
 // Crear el servidor HTTP
 const server = http.createServer((req, res) => {
   switch (req.url) {
     case '/index':
+      // Servir la página de inicio
       serveHTML(res, 'index.html');
       break;
     case '/about':
+      // Servir la página "Acerca de"
       serveHTML(res, 'about.html');
       break;
     case '/contact':
+      // Servir la página "Contacto"
       serveHTML(res, 'contact.html');
       break;
     default:
@@ -94,6 +62,5 @@ const server = http.createServer((req, res) => {
 
 // Iniciar el servidor
 server.listen(PORT, () => {
-  console.log(`Servidor escuchando en http://localhost:${PORT}`);
+  console.log(`Servidor escuchando en http://localhost:${PORT}/index`);
 });
->>>>>>> f895ea9c772be56f02758dbf1a15740c146a41c7
